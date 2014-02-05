@@ -20,6 +20,7 @@
         "bin-dir" : "bin"
     },
     "require": {
-        "phpspec/phpspec": "2.0.*@dev"
-    }
+        "phpspec/phpspec": "~2.0"
+    },
+    "minimum-stability": "dev"
 }

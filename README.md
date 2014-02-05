@@ -5,8 +5,7 @@
 Add this extension as a dependency in composer.json:
 
     "require-dev": {
-        "phpspec/phpspec" : "2.*@dev",
-        "ciaranmcnulty/phpspec-typehintedmethods": "*@dev"
+        "ciaranmcnulty/phpspec-typehintedmethods": "dev-master"
     }
 
 Install using composer, add the following to your phpspec.yml:
