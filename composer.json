@@ -1,0 +1,25 @@
+{
+    "name": "ciaranmcnulty/phpspec-typehintedmethods",
+    "type": "library",
+    "description": "Extension for phpspec to enhance generated methods",
+    "keywords": ["tdd","bdd","phpspec"],
+    "homepage": "http://github.com/ciaranmncnulty/phpspec-typehintedmethods",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ciaran McNulty",
+            "email": "mail@ciaranmcnulty.com",
+            "homepage": "http://ciaranmcnulty.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "config": {
+        "bin-dir" : "bin"
+    },
+    "require": {
+        "phpspec/phpspec": "2.0.*@dev"
+    }
+}
