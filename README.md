@@ -1,18 +1,5 @@
 #PhpSpec Typehinted Methods Extension
 
-##Installation
-
-Add this extension as a dependency in composer.json:
-
-    "require-dev": {
-        "ciaranmcnulty/phpspec-typehintedmethods": "dev-master"
-    }
-
-Install using composer, add the following to your phpspec.yml:
-
-    extensions:
-      - Cjm\PhpSpec\Extension\TypeHintedMethodsExtension
-
 ##Usage
 
 PhpSpec by default will generate nonexistent methods, but will not add typehints. This extension enables that behaviour.
@@ -56,3 +43,16 @@ However, some people write specs much more in an 'example' frame of mind, so mig
 In this case the author is using an ArrayToken to illustrate the example, but would prefer the typehint to be TokenInterface. For this author, the typehinting will be irritating because they will have to keep editing the typehint.
 
 (This is the reason core phpspec does not have this feature... yet)
+
+##Installation
+
+Add this extension as a dependency in composer.json:
+
+    "require-dev": {
+        "ciaranmcnulty/phpspec-typehintedmethods": "dev-master"
+    }
+
+Install using composer, add the following to your phpspec.yml:
+
+    extensions:
+      - Cjm\PhpSpec\Extension\TypeHintedMethodsExtension
