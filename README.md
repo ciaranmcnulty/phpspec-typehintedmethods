@@ -42,7 +42,7 @@ However, some people write specs much more in an 'example' frame of mind, so mig
 
 In this case the author is using an ArrayToken to illustrate the example, but would prefer the typehint to be TokenInterface. For this author, the typehinting will be irritating because they will have to keep editing the typehint.
 
-(This is the reason core phpspec does not have this feature... yet)
+This is the reason the functionality is not in core - we do not want to encourage authors to typehint against implementations (discussion at https://github.com/phpspec/phpspec/issues/230)
 
 ##Installation
 
@@ -56,3 +56,11 @@ Install using composer, add the following to your phpspec.yml:
 
     extensions:
       - Cjm\PhpSpec\Extension\TypeHintedMethodsExtension
+
+##Todo
+
+Future ideas:
+
+1. Analysis/generation of `use` statements in target file to allow shorter typehints
+
+2. Meta-analysis of examples to work out which parent class(es) could be used in typehint (?)
