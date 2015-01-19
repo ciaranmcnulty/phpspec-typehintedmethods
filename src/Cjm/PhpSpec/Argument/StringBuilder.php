@@ -26,7 +26,7 @@ class StringBuilder
         $argumentStrings = array();
 
         foreach ($arguments as $key=>$argument){
-            $argumentStrings[] = $this->getTypeHint($argument) . $this->getArgName($key);
+            $argumentStrings[] = $this->getTypeHint($argument) . $this->getArgName($key, $argument);
         }
 
         return join(', ', $argumentStrings);
@@ -49,12 +49,18 @@ class StringBuilder
 
     /**
      * @param $key
+     * @param $argument
      * @return string
      */
-    private function getArgName($key)
+    private function getArgName($key, $argument)
     {
-        $argName = '$argument' . ($key + 1);
+        if (!is_object(($argument))) {
+            return '$argument' . ($key + 1);
+        }
+        $typeHint = $this->classIdentifier->getTypeName($argument);
+        $parts = explode('\\', $typeHint);
+        $className = end($parts);
 
-        return $argName;
+        return lcfirst($className);
     }
 }
