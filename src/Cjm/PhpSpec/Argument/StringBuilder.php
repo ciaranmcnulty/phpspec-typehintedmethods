@@ -61,6 +61,6 @@ class StringBuilder
         $parts = explode('\\', $typeHint);
         $className = end($parts);
 
-        return '$'.lcfirst($className);
+        return '$'.lcfirst($className) . ($key + 1);
     }
 }

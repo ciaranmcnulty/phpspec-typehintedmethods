@@ -13,15 +13,25 @@ class StringBuilderSpec extends ObjectBehavior
         $this->beConstructedWith($classIdentifier);
     }
 
-    function it_should_use_generic_name_with_index_for_non_object_argument(ClassIdentifier $classIdentifier)
+    function it_should_use_generic_name_for_non_object_argument(ClassIdentifier $classIdentifier)
     {
         $this->buildFrom(array(2))->shouldReturn('$argument1');
     }
 
-    function it_should_use_typehint_to_name_object_argument(ClassIdentifier $classIdentifier)
+    function it_should_use_typehint__for_object_and_name_it_after_its_type(ClassIdentifier $classIdentifier)
     {
         $classIdentifier->getTypeName(Argument::any())->willReturn('ArrayObject');
 
-        $this->buildFrom(array(new \ArrayObject()))->shouldReturn('\ArrayObject $arrayObject');
+        $this->buildFrom(array(new \ArrayObject()))->shouldReturn('\ArrayObject $arrayObject1');
+    }
+
+    function it_should_use_index_to_avoid_name_collision(ClassIdentifier $classIdentifier)
+    {
+        $classIdentifier->getTypeName(Argument::any())->willReturn('ArrayObject');
+
+        $this
+            ->buildFrom(array(new \ArrayObject(), new \ArrayObject(), 1, 2))
+            ->shouldReturn('\ArrayObject $arrayObject1, \ArrayObject $arrayObject2, $argument3, $argument4')
+        ;
     }
 }
