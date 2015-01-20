@@ -13,7 +13,7 @@ Write a phpspec example that uses a non-existent method:
 
 And run the spec. After accepting the prompt, the following will appear in your class under specification:
 
-    public function foo(\ArrayObject $argument1)
+    public function foo(\ArrayObject $arrayObject)
     {
         // TODO: write logic here
     }
