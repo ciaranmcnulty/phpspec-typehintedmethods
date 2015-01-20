@@ -18,6 +18,6 @@ class StringBuilderSpec extends ObjectBehavior
     {
         $classIdentifier->getTypeName(Argument::any())->willReturn('ArrayObject');
 
-        $this->buildFrom(array(new \ArrayObject(), 2))->shouldReturn('\ArrayObject $argument1, $argument2');
+        $this->buildFrom(array(new \ArrayObject(), 2))->shouldReturn('\ArrayObject $arrayObject, $argument2');
     }
 }
