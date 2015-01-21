@@ -14,7 +14,7 @@
         }
     ],
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-4": { "Cjm\\PhpSpec\\": "src/Cjm/PhpSpec" }
     },
     "config": {
         "bin-dir" : "bin"
