@@ -14,13 +14,13 @@
         }
     ],
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-4": { "Cjm\\PhpSpec\\": "src/" }
     },
     "config": {
         "bin-dir" : "bin"
     },
     "require": {
-        "phpspec/phpspec": "~2.1.0"
+        "phpspec/phpspec": "~2.0,<=2.2"
     },
     "require-dev": {
         "behat/behat": "~3.0",

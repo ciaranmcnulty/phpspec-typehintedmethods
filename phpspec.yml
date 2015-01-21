@@ -1,2 +1,7 @@
+suites:
+  default:
+    namespace: Cjm\PhpSpec
+    psr4_prefix: Cjm\PhpSpec
+
 extensions:
   - Cjm\PhpSpec\Extension\TypeHintedMethodsExtension
