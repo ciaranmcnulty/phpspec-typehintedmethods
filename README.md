@@ -22,6 +22,21 @@ public function foo(\ArrayObject $arrayObject)
 }
 ```
 
+##Installation
+
+Add this extension as a composer dependency:
+
+```bash
+composer require --dev ciaranmcnulty/phpspec-typehintedmethods ~1.0
+```
+
+Add the following to your phpspec.yml:
+
+```yml
+extensions:
+  - Cjm\PhpSpec\Extension\TypeHintedMethodsExtension
+```
+
 ##Who should use this?
 
 There are pros and cons to this extension. It's written to satisfy a particular itch that I (Ciaran) had, because I tend to write examples like this:
@@ -51,21 +66,6 @@ function it_does_something_with_a_token(ArrayToken $token)
 In this case the author is using an ArrayToken to illustrate the example, but would prefer the typehint to be TokenInterface. For this author, the typehinting will be irritating because they will have to keep editing the typehint.
 
 This is the reason the functionality is not in core - we do not want to encourage authors to typehint against implementations (discussion at https://github.com/phpspec/phpspec/issues/230)
-
-##Installation
-
-Add this extension as a composer dependency:
-
-```bash
-composer require --dev ciaranmcnulty/phpspec-typehintedmethods ~1.0
-```
-
-Add the following to your phpspec.yml:
-
-```yml
-extensions:
-  - Cjm\PhpSpec\Extension\TypeHintedMethodsExtension
-```
 
 ##Todo
 
