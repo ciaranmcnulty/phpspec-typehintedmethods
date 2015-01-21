@@ -46,13 +46,11 @@ This is the reason the functionality is not in core - we do not want to encourag
 
 ##Installation
 
-Add this extension as a dependency in composer.json:
+Add this extension as a composer dependency:
 
-    "require-dev": {
-        "ciaranmcnulty/phpspec-typehintedmethods": "dev-master"
-    }
+    composer require --dev ciaranmcnulty/phpspec-typehintedmethods ~1.0
 
-Install using composer, add the following to your phpspec.yml:
+Add the following to your phpspec.yml:
 
     extensions:
       - Cjm\PhpSpec\Extension\TypeHintedMethodsExtension
