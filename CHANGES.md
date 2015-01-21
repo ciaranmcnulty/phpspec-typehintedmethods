@@ -1,7 +1,8 @@
-Upcoming
-========
+1.1.0
+=====
 
-* Arguments have meaningful names
+* Arguments have meaningful names [gnugat]
+* Moved to PSR-4
 
 1.0.1
 =====
