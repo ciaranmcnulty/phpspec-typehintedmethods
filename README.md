@@ -27,7 +27,7 @@ public function foo(\ArrayObject $arrayObject)
 Add this extension as a composer dependency:
 
 ```bash
-composer require --dev ciaranmcnulty/phpspec-typehintedmethods ~1.0
+composer require --dev ciaranmcnulty/phpspec-typehintedmethods ~1.1
 ```
 
 Add the following to your phpspec.yml:
