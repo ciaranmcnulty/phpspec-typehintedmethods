@@ -12,45 +12,41 @@ use PhpSpec\Util\Filesystem;
 class TypeHintedMethodGenerator implements GeneratorInterface
 {
     /**
-     * @var \PhpSpec\Console\IO
+     * @var IO
      */
     private $io;
 
     /**
-     * @var \PhpSpec\CodeGenerator\TemplateRenderer
+     * @var TemplateRenderer
      */
     private $templates;
 
     /**
-     * @var \PhpSpec\Util\Filesystem
+     * @var Filesystem
      */
     private $filesystem;
 
     /**
-     * @var \Cjm\PhpSpec\Argument\StringBuilder
+     * @var StringBuilder
      */
     private $argumentBuilder;
 
     /**
-     * @param IO $io
+     * @param IO               $io
      * @param TemplateRenderer $templates
-     * @param Filesystem $filesystem
-     * @param StringBuilder $argumentBuilder
+     * @param Filesystem       $filesystem
+     * @param StringBuilder    $argumentBuilder
      */
     public function __construct(IO $io, TemplateRenderer $templates, Filesystem $filesystem = null, StringBuilder $argumentBuilder)
     {
         $this->argumentBuilder = $argumentBuilder;
         $this->io = $io;
         $this->templates = $templates;
-        $this->filesystem = $filesystem ?: new Filesystem;
+        $this->filesystem = $filesystem ?: new Filesystem();
     }
 
     /**
-     * @param ResourceInterface $resource
-     * @param string            $generation
-     * @param array             $data
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function supports(ResourceInterface $resource, $generation, array $data)
     {
@@ -58,15 +54,12 @@ class TypeHintedMethodGenerator implements GeneratorInterface
     }
 
     /**
-     * @param ResourceInterface $resource
-     * @param array $data
-     *
-     * @return mixed
+     * {@inheritDoc}
      */
     public function generate(ResourceInterface $resource, array $data = array())
     {
-        $filepath  = $resource->getSrcFilename();
-        $name      = $data['name'];
+        $filepath = $resource->getSrcFilename();
+        $name = $data['name'];
         $arguments = $data['arguments'];
 
         $argString = $this->argumentBuilder->buildFrom($arguments);
@@ -79,17 +72,17 @@ class TypeHintedMethodGenerator implements GeneratorInterface
         }
 
         $code = $this->filesystem->getFileContents($filepath);
-        $code = preg_replace('/}[ \n]*$/', rtrim($content) ."\n}\n", trim($code));
+        $code = preg_replace('/}[ \n]*$/', rtrim($content)."\n}\n", trim($code));
         $this->filesystem->putFileContents($filepath, $code);
 
         $this->io->writeln(sprintf(
-                "\n<info>Method <value>%s::%s()</value> has been created.</info>",
-                $resource->getSrcClassname(), $name
-            ), 2);
+            "\n<info>Method <value>%s::%s()</value> has been created.</info>",
+            $resource->getSrcClassname(), $name
+        ), 2);
     }
 
     /**
-     * @return int
+     * {@inheritDoc}
      */
     public function getPriority()
     {
@@ -109,4 +102,3 @@ __halt_compiler();
     {
         // TODO: write logic here
     }
-

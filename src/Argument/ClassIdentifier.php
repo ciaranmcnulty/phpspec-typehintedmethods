@@ -7,7 +7,8 @@ use Prophecy\Prophecy\ProphecySubjectInterface;
 class ClassIdentifier
 {
     /**
-     * @param $argument
+     * @param mixed $argument
+     *
      * @return string
      */
     public function getTypeName($argument)
@@ -22,7 +23,8 @@ class ClassIdentifier
     }
 
     /**
-     * @param $argument
+     * @param mixed $argument
+     *
      * @return bool
      */
     private function isProphecyObject($argument)
@@ -31,7 +33,8 @@ class ClassIdentifier
     }
 
     /**
-     * @param $argument
+     * @param mixed $argument
+     *
      * @return mixed|string
      */
     private function getProphecyBaseType($argument)
@@ -47,7 +50,8 @@ class ClassIdentifier
     }
 
     /**
-     * @param $argument
+     * @param mixed $argument
+     *
      * @return array
      */
     private function getAllInterfaces($argument)

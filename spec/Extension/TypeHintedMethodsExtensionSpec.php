@@ -2,7 +2,6 @@
 
 namespace spec\Cjm\PhpSpec\Extension;
 
-use PhpSpec\CodeGenerator\Generator\MethodGenerator;
 use PhpSpec\ObjectBehavior;
 use PhpSpec\ServiceContainer;
 use Prophecy\Argument;

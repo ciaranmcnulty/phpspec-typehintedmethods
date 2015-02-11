@@ -11,7 +11,7 @@ use PhpSpec\ServiceContainer;
 class TypeHintedMethodsExtension implements ExtensionInterface
 {
     /**
-     * @param ServiceContainer $container
+     * {@inheritDoc}
      */
     public function load(ServiceContainer $container)
     {

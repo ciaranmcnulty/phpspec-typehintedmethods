@@ -3,7 +3,6 @@
 namespace spec\Cjm\PhpSpec\Argument;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class ClassIdentifierSpec extends ObjectBehavior
 {

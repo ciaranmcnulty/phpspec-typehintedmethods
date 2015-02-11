@@ -19,12 +19,13 @@ class StringBuilder
 
     /**
      * @param array $arguments
+     *
      * @return string
      */
     public function buildFrom($arguments)
     {
         $argumentStrings = array();
-        foreach ($arguments as $key => $argument){
+        foreach ($arguments as $key => $argument) {
             $argumentStrings[] = $this->getTypeHint($argument).$this->getArgName($argument);
         }
         $allCount = array_count_values($argumentStrings);
@@ -42,7 +43,8 @@ class StringBuilder
     }
 
     /**
-     * @param $argument
+     * @param mixed $argument
+     *
      * @return string
      */
     private function getTypeHint($argument)
@@ -56,7 +58,8 @@ class StringBuilder
     }
 
     /**
-     * @param $argument
+     * @param mixed $argument
+     *
      * @return string
      */
     private function getArgName($argument)
