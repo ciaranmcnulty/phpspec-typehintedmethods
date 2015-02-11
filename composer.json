@@ -20,10 +20,20 @@
         "bin-dir" : "bin"
     },
     "require": {
-        "phpspec/phpspec": "~2.0,<=2.2"
+        "gnugat/medio": "~1.0@alpha",
+        "phpspec/phpspec": "~2.0,<=2.2",
+        "puli/composer-plugin": "~1.0@beta",
+        "puli/discovery": "~1.0@beta",
+        "puli/factory": "~1.0@beta",
+        "puli/repository": "~1.0@beta",
+        "puli/repository-manager": "~1.0@beta",
+        "webmozart/glob": "~1.0@beta",
+        "webmozart/json": "~1.0@beta",
+        "webmozart/key-value-store": "~1.0@beta"
     },
     "require-dev": {
         "behat/behat": "~3.0",
-        "symfony/filesystem": "~2.3"
+        "symfony/filesystem": "~2.3",
+        "puli/cli": "~1.0@beta"
     }
 }
