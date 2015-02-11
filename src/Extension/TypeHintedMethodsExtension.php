@@ -2,11 +2,14 @@
 
 namespace Cjm\PhpSpec\Extension;
 
-use Cjm\PhpSpec\Argument\ClassIdentifier;
-use Cjm\PhpSpec\Argument\StringBuilder;
+use Cjm\PhpSpec\Generator\ArgumentsGenerator;
 use Cjm\PhpSpec\Generator\TypeHintedMethodGenerator;
+use Cjm\PhpSpec\Service\ArgumentCollectionFactory;
+use Cjm\PhpSpec\Service\ArgumentNameFactory;
+use Cjm\PhpSpec\Service\TypeFactory;
 use PhpSpec\Extension\ExtensionInterface;
 use PhpSpec\ServiceContainer;
+use PhpSpec\Util\Filesystem;
 
 class TypeHintedMethodsExtension implements ExtensionInterface
 {
@@ -15,20 +18,14 @@ class TypeHintedMethodsExtension implements ExtensionInterface
      */
     public function load(ServiceContainer $container)
     {
-        $container->set('code_generator.generators.method.classidentifier', function ($c) {
-            return new ClassIdentifier();
-        });
-
-        $container->set('code_generator.generators.method.argumentbuilder', function ($c) {
-            return new StringBuilder($c->get('code_generator.generators.method.classidentifier'));
-        });
-
         $container->set('code_generator.generators.method', function ($c) {
+            $argumentCollectionFactory = new ArgumentCollectionFactory(new ArgumentNameFactory(), new TypeFactory());
+
             return new TypeHintedMethodGenerator(
                 $c->get('console.io'),
                 $c->get('code_generator.templates'),
-                null,
-                $c->get('code_generator.generators.method.argumentbuilder')
+                new Filesystem(),
+                new ArgumentsGenerator($argumentCollectionFactory, $c->get('medio.pretty_printer'))
             );
         });
     }

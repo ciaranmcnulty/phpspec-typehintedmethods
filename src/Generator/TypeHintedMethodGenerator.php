@@ -2,7 +2,6 @@
 
 namespace Cjm\PhpSpec\Generator;
 
-use Cjm\PhpSpec\Argument\StringBuilder;
 use PhpSpec\CodeGenerator\Generator\GeneratorInterface;
 use PhpSpec\CodeGenerator\TemplateRenderer;
 use PhpSpec\Console\IO;
@@ -27,22 +26,27 @@ class TypeHintedMethodGenerator implements GeneratorInterface
     private $filesystem;
 
     /**
-     * @var StringBuilder
+     * @var ArgumentsGenerator
      */
-    private $argumentBuilder;
+    private $argumentsGenerator;
 
     /**
-     * @param IO               $io
-     * @param TemplateRenderer $templates
-     * @param Filesystem       $filesystem
-     * @param StringBuilder    $argumentBuilder
+     * @param IO                 $io
+     * @param TemplateRenderer   $templates
+     * @param Filesystem         $filesystem
+     * @param ArgumentsGenerator $argumentsGenerator
      */
-    public function __construct(IO $io, TemplateRenderer $templates, Filesystem $filesystem = null, StringBuilder $argumentBuilder)
+    public function __construct(
+        IO $io,
+        TemplateRenderer $templates,
+        Filesystem $filesystem,
+        ArgumentsGenerator $argumentsGenerator
+    )
     {
-        $this->argumentBuilder = $argumentBuilder;
         $this->io = $io;
         $this->templates = $templates;
-        $this->filesystem = $filesystem ?: new Filesystem();
+        $this->filesystem = $filesystem;
+        $this->argumentsGenerator = $argumentsGenerator;
     }
 
     /**
@@ -60,11 +64,12 @@ class TypeHintedMethodGenerator implements GeneratorInterface
     {
         $filepath = $resource->getSrcFilename();
         $name = $data['name'];
-        $arguments = $data['arguments'];
+        $arguments = $this->argumentsGenerator->generate($resource, array(
+            'variables' => $data['arguments'],
+            'length_restriction' => strlen("    public function {$data['name']}()"),
+        ));
 
-        $argString = $this->argumentBuilder->buildFrom($arguments);
-
-        $values = array('%name%' => $name, '%arguments%' => $argString);
+        $values = array('%name%' => $name, '%arguments%' => $arguments);
         if (!$content = $this->templates->render('method', $values)) {
             $content = $this->templates->renderString(
                 $this->getTemplate(), $values

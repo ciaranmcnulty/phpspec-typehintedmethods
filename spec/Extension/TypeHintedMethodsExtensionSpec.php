@@ -2,6 +2,7 @@
 
 namespace spec\Cjm\PhpSpec\Extension;
 
+use Gnugat\Medio\PrettyPrinter;
 use PhpSpec\ObjectBehavior;
 use PhpSpec\ServiceContainer;
 use Prophecy\Argument;
@@ -13,10 +14,11 @@ class TypeHintedMethodsExtensionSpec extends ObjectBehavior
         $this->shouldHaveType('PhpSpec\Extension\ExtensionInterface');
     }
 
-    function it_registers_the_replacement_method_generator(ServiceContainer $container)
+    function it_registers_the_replacement_method_generator(PrettyPrinter $prettyPrinter, ServiceContainer $container)
     {
-        $this->load($container);
+        $container->get('medio.pretty_printer')->willReturn($prettyPrinter);
+        $container->set('code_generator.generators.method', Argument::any())->shouldBeCalled();
 
-        $container->set('code_generator.generators.method', Argument::any())->shouldHaveBeenCalled();
+        $this->load($container);
     }
 }
