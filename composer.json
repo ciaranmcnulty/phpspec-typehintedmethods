@@ -20,7 +20,8 @@
         "bin-dir" : "bin"
     },
     "require": {
-        "phpspec/phpspec": "~2.0,<=2.2"
+        "phpspec/phpspec": "~2.0,<=2.2",
+        "gnugat/medio": "~1.0@alpha"
     },
     "require-dev": {
         "behat/behat": "~3.0",
