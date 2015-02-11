@@ -2,6 +2,7 @@
 
 namespace spec\Cjm\PhpSpec\Service;
 
+use ArrayObject;
 use PhpSpec\ObjectBehavior;
 
 class TypeFactorySpec extends ObjectBehavior
@@ -13,6 +14,14 @@ class TypeFactorySpec extends ObjectBehavior
         $type = $this->fromVariable($object);
 
         $type->getName()->shouldBe('\DateTime');
+        $type->isObject()->shouldBe(true);
+    }
+
+    function it_makes_an_object_from_prophecy_double(ArrayObject $arrayObject)
+    {
+        $type = $this->fromVariable($arrayObject);
+
+        $type->getName()->shouldBe('\ArrayObject');
         $type->isObject()->shouldBe(true);
     }
 
