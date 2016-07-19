@@ -70,6 +70,7 @@ class TypeHintedMethodGenerator implements GeneratorInterface
         $arguments = $data['arguments'];
 
         $argString = $this->argumentBuilder->buildFrom($arguments);
+        $argumentNamespace = $this->argumentBuilder->getNamespace($arguments);
 
         $values = array('%name%' => $name, '%arguments%' => $argString);
         if (!$content = $this->templates->render('method', $values)) {
@@ -79,6 +80,11 @@ class TypeHintedMethodGenerator implements GeneratorInterface
         }
 
         $code = $this->filesystem->getFileContents($filepath);
+        if ($argumentNamespace) {
+            $code = preg_replace('/\nuse\s'.$argumentNamespace.';/', '', $code);
+            $code = preg_replace('/namespace\s(.+);/', '$0'."\n".'use '.$argumentNamespace.';', $code);
+        }
+
         $code = preg_replace('/}[ \n]*$/', rtrim($content) ."\n}\n", trim($code));
         $this->filesystem->putFileContents($filepath, $code);
 

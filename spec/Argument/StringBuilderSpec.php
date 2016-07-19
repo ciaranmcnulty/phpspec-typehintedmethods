@@ -22,7 +22,7 @@ class StringBuilderSpec extends ObjectBehavior
     {
         $classIdentifier->getTypeName(Argument::any())->willReturn('ArrayObject');
 
-        $this->buildFrom(array(new \ArrayObject()))->shouldReturn('\ArrayObject $arrayObject');
+        $this->buildFrom(array(new \ArrayObject()))->shouldReturn('ArrayObject $arrayObject');
     }
 
     function it_should_suffix_names_when_necessary_to_avoid_name_collision(ClassIdentifier $classIdentifier)
@@ -31,7 +31,7 @@ class StringBuilderSpec extends ObjectBehavior
 
         $this
             ->buildFrom(array(new \ArrayObject(), new \ArrayObject(), 1, 2))
-            ->shouldReturn('\ArrayObject $arrayObject1, \ArrayObject $arrayObject2, $argument1, $argument2')
+            ->shouldReturn('ArrayObject $arrayObject1, ArrayObject $arrayObject2, $argument1, $argument2')
         ;
     }
 }
