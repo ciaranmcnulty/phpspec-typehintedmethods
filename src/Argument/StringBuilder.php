@@ -24,9 +24,10 @@ class StringBuilder
     public function buildFrom($arguments)
     {
         $argumentStrings = array();
-        foreach ($arguments as $key => $argument){
+        foreach ($arguments as $key => $argument) {
             $argumentStrings[] = $this->getTypeHint($argument).$this->getArgName($argument);
         }
+
         $allCount = array_count_values($argumentStrings);
         $duplicatesCount = array_filter($allCount, function ($count) {
             return 1 < $count;
@@ -49,10 +50,14 @@ class StringBuilder
     {
         $typeHint = '';
         if (is_object($argument)) {
-            $typeHint .= '\\'.$this->classIdentifier->getTypeName($argument).' ';
+            $typeHint = $this->classIdentifier->getTypeName($argument).' ';
         }
 
-        return $typeHint;
+        if (is_array($parts = explode('\\', $typeHint))) {
+            return end($parts);
+        } else {
+            return $typeHint;
+        }
     }
 
     /**
@@ -69,5 +74,20 @@ class StringBuilder
         $className = end($parts);
 
         return '$'.lcfirst($className);
+    }
+
+    /**
+     * @param $arguments
+     * @return mixed
+     */
+    public function getNamespace($arguments)
+    {
+        $namespace = [];
+        foreach ($arguments as $argument) {
+            if (is_object($argument)) {
+                $namespace[] = addslashes($this->classIdentifier->getTypeName($argument));
+            }
+        }
+        return end($namespace);
     }
 }

@@ -3,6 +3,8 @@
 namespace Cjm\PhpSpec\Generator;
 
 use Cjm\PhpSpec\Argument\StringBuilder;
+use Cjm\PhpSpec\Decorator\Code;
+use Cjm\PhpSpec\Decorator\Code as CodeDecorator;
 use PhpSpec\CodeGenerator\Generator\GeneratorInterface;
 use PhpSpec\CodeGenerator\TemplateRenderer;
 use PhpSpec\Console\IO;
@@ -11,6 +13,8 @@ use PhpSpec\Util\Filesystem;
 
 class TypeHintedMethodGenerator implements GeneratorInterface
 {
+    /** @var CodeDecorator */
+    public $codeDecorator;
     /**
      * @var \PhpSpec\Console\IO
      */
@@ -36,13 +40,15 @@ class TypeHintedMethodGenerator implements GeneratorInterface
      * @param TemplateRenderer $templates
      * @param Filesystem $filesystem
      * @param StringBuilder $argumentBuilder
+     * @param CodeDecorator $codeDecorator
      */
-    public function __construct(IO $io, TemplateRenderer $templates, Filesystem $filesystem = null, StringBuilder $argumentBuilder)
+    public function __construct(IO $io, TemplateRenderer $templates, Filesystem $filesystem = null, StringBuilder $argumentBuilder, Code $codeDecorator)
     {
         $this->argumentBuilder = $argumentBuilder;
         $this->io = $io;
         $this->templates = $templates;
         $this->filesystem = $filesystem ?: new Filesystem;
+        $this->codeDecorator = $codeDecorator;
     }
 
     /**
@@ -70,6 +76,7 @@ class TypeHintedMethodGenerator implements GeneratorInterface
         $arguments = $data['arguments'];
 
         $argString = $this->argumentBuilder->buildFrom($arguments);
+        $argumentNamespace = $this->argumentBuilder->getNamespace($arguments);
 
         $values = array('%name%' => $name, '%arguments%' => $argString);
         if (!$content = $this->templates->render('method', $values)) {
@@ -79,6 +86,9 @@ class TypeHintedMethodGenerator implements GeneratorInterface
         }
 
         $code = $this->filesystem->getFileContents($filepath);
+        if ($argumentNamespace) {
+            $code = $this->codeDecorator->addUseStatementForArgument($argumentNamespace, $code);
+        }
         $code = preg_replace('/}[ \n]*$/', rtrim($content) ."\n}\n", trim($code));
         $this->filesystem->putFileContents($filepath, $code);
 
