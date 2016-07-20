@@ -76,11 +76,17 @@ class StringBuilder
         return '$'.lcfirst($className);
     }
 
+    /**
+     * @param $arguments
+     * @return mixed
+     */
     public function getNamespace($arguments)
     {
         $namespace = [];
         foreach ($arguments as $argument) {
-            $namespace[] = addslashes($this->classIdentifier->getTypeName($argument));
+            if (is_object($argument)) {
+                $namespace[] = addslashes($this->classIdentifier->getTypeName($argument));
+            }
         }
         return end($namespace);
     }

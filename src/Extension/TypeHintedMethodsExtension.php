@@ -4,6 +4,7 @@ namespace Cjm\PhpSpec\Extension;
 
 use Cjm\PhpSpec\Argument\ClassIdentifier;
 use Cjm\PhpSpec\Argument\StringBuilder;
+use Cjm\PhpSpec\Decorator\Code as CodeDecorator;
 use Cjm\PhpSpec\Generator\TypeHintedMethodGenerator;
 use PhpSpec\Extension\ExtensionInterface;
 use PhpSpec\ServiceContainer;
@@ -23,12 +24,17 @@ class TypeHintedMethodsExtension implements ExtensionInterface
             return new StringBuilder($c->get('code_generator.generators.method.classidentifier'));
         });
 
+        $container->set('code_generator.decorators.code', function ($c) {
+            return new CodeDecorator();
+        });
+
         $container->set('code_generator.generators.method', function ($c) {
             return new TypeHintedMethodGenerator(
                 $c->get('console.io'),
                 $c->get('code_generator.templates'),
                 null,
-                $c->get('code_generator.generators.method.argumentbuilder')
+                $c->get('code_generator.generators.method.argumentbuilder'),
+                $c->get('code_generator.decorators.code')
             );
         });
     }
