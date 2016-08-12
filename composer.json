@@ -20,10 +20,10 @@
         "bin-dir" : "bin"
     },
     "require": {
-        "phpspec/phpspec": "~2.0,<=2.5"
+        "phpspec/phpspec": "~3.0"
     },
     "require-dev": {
         "behat/behat": "~3.0",
-        "symfony/filesystem": "~2.3"
+        "symfony/filesystem": "~3.0"
     }
 }
