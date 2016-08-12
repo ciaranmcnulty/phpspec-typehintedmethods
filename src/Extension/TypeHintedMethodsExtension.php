@@ -5,25 +5,26 @@ namespace Cjm\PhpSpec\Extension;
 use Cjm\PhpSpec\Argument\ClassIdentifier;
 use Cjm\PhpSpec\Argument\StringBuilder;
 use Cjm\PhpSpec\Generator\TypeHintedMethodGenerator;
-use PhpSpec\Extension\ExtensionInterface;
+use PhpSpec\Extension;
 use PhpSpec\ServiceContainer;
 
-class TypeHintedMethodsExtension implements ExtensionInterface
+class TypeHintedMethodsExtension implements Extension
 {
     /**
      * @param ServiceContainer $container
+     * @param array            $params
      */
-    public function load(ServiceContainer $container)
+    public function load(ServiceContainer $container, array $params)
     {
-        $container->set('code_generator.generators.method.classidentifier', function ($c) {
+        $container->define('code_generator.generators.method.classidentifier', function ($c) {
             return new ClassIdentifier();
         });
 
-        $container->set('code_generator.generators.method.argumentbuilder', function ($c) {
+        $container->define('code_generator.generators.method.argumentbuilder', function ($c) {
             return new StringBuilder($c->get('code_generator.generators.method.classidentifier'));
         });
 
-        $container->set('code_generator.generators.method', function ($c) {
+        $container->define('code_generator.generators.method', function ($c) {
             return new TypeHintedMethodGenerator(
                 $c->get('console.io'),
                 $c->get('code_generator.templates'),

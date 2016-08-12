@@ -3,16 +3,16 @@
 namespace Cjm\PhpSpec\Generator;
 
 use Cjm\PhpSpec\Argument\StringBuilder;
-use PhpSpec\CodeGenerator\Generator\GeneratorInterface;
+use PhpSpec\CodeGenerator\Generator\Generator;
 use PhpSpec\CodeGenerator\TemplateRenderer;
-use PhpSpec\Console\IO;
-use PhpSpec\Locator\ResourceInterface;
+use PhpSpec\Console\ConsoleIO;
+use PhpSpec\Locator\Resource;
 use PhpSpec\Util\Filesystem;
 
-class TypeHintedMethodGenerator implements GeneratorInterface
+class TypeHintedMethodGenerator implements Generator
 {
     /**
-     * @var \PhpSpec\Console\IO
+     * @var \PhpSpec\Console\ConsoleIO
      */
     private $io;
 
@@ -32,12 +32,12 @@ class TypeHintedMethodGenerator implements GeneratorInterface
     private $argumentBuilder;
 
     /**
-     * @param IO $io
+     * @param ConsoleIO $io
      * @param TemplateRenderer $templates
      * @param Filesystem $filesystem
      * @param StringBuilder $argumentBuilder
      */
-    public function __construct(IO $io, TemplateRenderer $templates, Filesystem $filesystem = null, StringBuilder $argumentBuilder)
+    public function __construct(ConsoleIO $io, TemplateRenderer $templates, Filesystem $filesystem = null, StringBuilder $argumentBuilder)
     {
         $this->argumentBuilder = $argumentBuilder;
         $this->io = $io;
@@ -46,24 +46,24 @@ class TypeHintedMethodGenerator implements GeneratorInterface
     }
 
     /**
-     * @param ResourceInterface $resource
-     * @param string            $generation
-     * @param array             $data
+     * @param Resource $resource
+     * @param string   $generation
+     * @param array    $data
      *
      * @return bool
      */
-    public function supports(ResourceInterface $resource, $generation, array $data)
+    public function supports(Resource $resource, $generation, array $data)
     {
         return 'method' === $generation;
     }
 
     /**
-     * @param ResourceInterface $resource
+     * @param Resource $resource
      * @param array $data
      *
      * @return mixed
      */
-    public function generate(ResourceInterface $resource, array $data = array())
+    public function generate(Resource $resource, array $data = array())
     {
         $filepath  = $resource->getSrcFilename();
         $name      = $data['name'];
