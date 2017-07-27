@@ -20,7 +20,7 @@
         "bin-dir" : "bin"
     },
     "require": {
-        "phpspec/phpspec": "~3.0"
+        "phpspec/phpspec": "4.0.0-rc1"
     },
     "require-dev": {
         "behat/behat": "~3.0",
