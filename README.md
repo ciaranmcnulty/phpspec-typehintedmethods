@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ciaranmcnulty/phpspec-typehintedmethods.svg?branch=master)](https://travis-ci.org/ciaranmcnulty/phpspec-typehintedmethods)
+
 #PhpSpec Typehinted Methods Extension
 
 ##Usage
