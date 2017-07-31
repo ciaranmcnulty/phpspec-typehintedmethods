@@ -45,14 +45,7 @@ class TypeHintedMethodGenerator implements Generator
         $this->filesystem = $filesystem ?: new Filesystem;
     }
 
-    /**
-     * @param Resource $resource
-     * @param string   $generation
-     * @param array    $data
-     *
-     * @return bool
-     */
-    public function supports(Resource $resource, $generation, array $data)
+    public function supports(Resource $resource, string $generation, array $data) : bool
     {
         return 'method' === $generation;
     }
@@ -88,10 +81,7 @@ class TypeHintedMethodGenerator implements Generator
             ), 2);
     }
 
-    /**
-     * @return int
-     */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 0;
     }
