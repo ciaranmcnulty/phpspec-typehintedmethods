@@ -11,6 +11,7 @@ matrix:
     - php: 7.0
     - php: 7.1
     - php: nightly
+      env: COMPOSER_ARGS='--ignore-platform-reqs'
   allow_failures:
     - php: nightly
 
