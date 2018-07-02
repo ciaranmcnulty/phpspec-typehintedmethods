@@ -27,5 +27,7 @@
     "require-dev": {
         "behat/behat": "~3.0",
         "symfony/filesystem": "~3.0"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
