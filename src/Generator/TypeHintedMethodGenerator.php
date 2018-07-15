@@ -56,7 +56,7 @@ class TypeHintedMethodGenerator implements Generator
      *
      * @return mixed
      */
-    public function generate(Resource $resource, array $data = array())
+    public function generate(Resource $resource, array $data = array()) : void
     {
         $filepath  = $resource->getSrcFilename();
         $name      = $data['name'];
