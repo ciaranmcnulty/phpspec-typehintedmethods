@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/ciaranmcnulty/phpspec-typehintedmethods.svg?branch=master)](https://travis-ci.org/ciaranmcnulty/phpspec-typehintedmethods)
 
-#PhpSpec Typehinted Methods Extension
+# PhpSpec Typehinted Methods Extension
 
-##Usage
+## Usage
 
 PhpSpec by default will generate nonexistent methods, but will not add typehints. This extension enables that behaviour.
 
@@ -24,7 +24,7 @@ public function foo(\ArrayObject $arrayObject)
 }
 ```
 
-##Installation
+## Installation
 
 Add this extension as a composer dependency:
 
@@ -39,7 +39,7 @@ extensions:
   Cjm\PhpSpec\Extension\TypeHintedMethodsExtension: ~
 ```
 
-##Who should use this?
+## Who should use this?
 
 There are pros and cons to this extension. It's written to satisfy a particular itch that I (Ciaran) had, because I tend to write examples like this:
 
@@ -69,7 +69,7 @@ In this case the author is using an ArrayToken to illustrate the example, but wo
 
 This is the reason the functionality is not in core - we do not want to encourage authors to typehint against implementations (discussion at https://github.com/phpspec/phpspec/issues/230)
 
-##Todo
+## Todo
 
 Future ideas:
 
